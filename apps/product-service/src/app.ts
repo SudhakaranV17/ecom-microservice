@@ -1,5 +1,8 @@
-import { type Request, type Response } from "express";
-import express from "express";
+import express, {
+  type Request,
+  type Response,
+  type NextFunction,
+} from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
@@ -8,27 +11,31 @@ import dns from "node:dns/promises";
 import { pinoHttp } from "pino-http";
 import logger from "./middleware/Logger";
 import userRoute from "./modules/user/user.route";
-dns.setServers(["1.1.1.1"]);
+import authRoute from "./modules/auth/auth.route";
+import { clerkMiddleware } from "@clerk/express";
 
+dns.setServers(["1.1.1.1"]);
 dotenv.config();
 
 const app: express.Application = express();
-app.use(
-  pinoHttp({
-    logger,
-  }),
-);
+
+// Middleware — cast to any where third-party types don't match Express 5 generics
+app.use(pinoHttp({ logger }));
+app.use(clerkMiddleware());
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/health", (req: Request, res: Response) => {
-  return res.json({ status: "OK", message: "Server is running" });
+app.get("/health", (_req: Request, res: Response) => {
+  res.json({ status: "OK", message: "Server is running" });
 });
 
+app.use("/auth", authRoute);
 app.use("/user", userRoute);
 
-app.use(ErrorMiddleware);
-
+// Error handler must come last
+app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
+  ErrorMiddleware(err, req, res, _next);
+});
 export default app;

@@ -1,19 +1,33 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+export interface IUser extends Document {
+  authId: string;
+  name: string;
+  email: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
-const UserModel = mongoose.model("User", userSchema);
+const userSchema = new Schema<IUser>(
+  {
+    authId: {
+      type: String,
+      required: true,
+      unique: true, // prevents duplicate Clerk users
+      index: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    // password intentionally omitted — Clerk manages auth
+  },
+  { timestamps: true },
+);
+
+const UserModel = mongoose.model<IUser>("User", userSchema);
 export default UserModel;

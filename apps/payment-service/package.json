@@ -1,5 +1,5 @@
 {
-  "name": "payment-service",
+  "name": "payment-service-hono",
   "type": "module",
   "scripts": {
     "dev": "tsx --env-file=.env --watch src/index.ts",
