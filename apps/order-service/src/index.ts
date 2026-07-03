@@ -1,4 +1,6 @@
 import Fastify from "fastify";
+import { clerkPlugin, getAuth } from "@clerk/fastify";
+import { authMiddleware } from "./middleware/authMiddleware.js";
 
 const fastify = Fastify({
   logger: {
@@ -11,9 +13,13 @@ const fastify = Fastify({
     },
   },
 });
-
+fastify.register(clerkPlugin);
 fastify.get("/health", async (request, reply) => {
   return { status: "UP" };
+});
+fastify.get("/test", { preHandler: authMiddleware }, async (request, reply) => {
+  const userId = request.userId;
+  return { status: "UP from order service", userId };
 });
 
 /**

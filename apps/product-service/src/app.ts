@@ -12,7 +12,7 @@ import { pinoHttp } from "pino-http";
 import logger from "./middleware/Logger";
 import userRoute from "./modules/user/user.route";
 import authRoute from "./modules/auth/auth.route";
-import { clerkMiddleware } from "@clerk/express";
+import { clerkMiddleware, getAuth } from "@clerk/express";
 
 dns.setServers(["1.1.1.1"]);
 dotenv.config();
@@ -33,6 +33,12 @@ app.get("/health", (_req: Request, res: Response) => {
 
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
+
+app.get("/test", (req, res) => {
+  const { userId } = getAuth(req, res);
+  console.log(userId);
+  res.json({ message: "up from product service", userId });
+});
 
 // Error handler must come last
 app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {

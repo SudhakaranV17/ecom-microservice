@@ -2,8 +2,9 @@
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
     "module": "CommonJS",
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "outDir": "dist"
   },
-  "include": ["**/*.ts"],
+  "include": ["src/**/*.ts", "*.ts"],
   "exclude": ["node_modules", "dist"]
 }
