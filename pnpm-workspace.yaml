@@ -3,7 +3,9 @@ packages:
   - "packages/*"
 allowBuilds:
   '@clerk/shared': true
+  '@prisma/engines': true
   bcrypt: true
   esbuild: true
+  prisma: true
   sharp: true
 minimumReleaseAge: 0
