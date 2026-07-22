@@ -8,7 +8,7 @@ const server = http.createServer(app);
 server
   .listen(process.env.PORT || 8000, () => {
     logger.info(`Server is running on port ${process.env.PORT || 8000}`);
-    ConnectDB();
+    // ConnectDB();
   })
   .on("error", (error) => {
     logger.error({ err: error }, "Error starting server");
