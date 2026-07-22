@@ -1,0 +1,16 @@
+services:
+
+  admin:
+    container_name: ecommerce-admin
+    build:
+      context: .
+      dockerfile: apps/admin/Dockerfile
+
+    ports:
+      - "3001:3001"
+
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+
+    restart: unless-stopped

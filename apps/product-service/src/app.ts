@@ -4,6 +4,7 @@ import express, {
   type NextFunction,
 } from "express";
 import dotenv from "dotenv";
+dotenv.config();
 import cors from "cors";
 import helmet from "helmet";
 import { ErrorMiddleware } from "./middleware/ErrorMiddleware";
@@ -13,9 +14,10 @@ import logger from "./middleware/Logger";
 import userRoute from "./modules/user/user.route";
 import authRoute from "./modules/auth/auth.route";
 import { clerkMiddleware, getAuth } from "@clerk/express";
+import productRoute from "./modules/product/product.route";
+import categoryRoute from "./modules/category/category.route";
 
 dns.setServers(["1.1.1.1"]);
-dotenv.config();
 
 const app: express.Application = express();
 
@@ -33,9 +35,12 @@ app.get("/health", (_req: Request, res: Response) => {
 
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
+app.use("/category", categoryRoute);
+app.use("/products", productRoute);
 
 app.get("/test", (req, res) => {
-  const { userId } = getAuth(req, res);
+  const { userId } = getAuth(req);
+  logger.info(`test endpoint accessed ${JSON.stringify(userId, null, 2)}`);
   console.log(userId);
   res.json({ message: "up from product service", userId });
 });
