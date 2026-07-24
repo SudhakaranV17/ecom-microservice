@@ -1,5 +1,6 @@
 import type { Product, Category } from "@repo/product-db";
 
+export type ProductType = Product;
 export interface StripeProductType {
   id: string;
   name: string;
@@ -7,6 +8,5 @@ export interface StripeProductType {
   quantity: number;
 }
 
-export type ProductType = Product;
 export type CategoryType = Category;
 export type ProductsType = ProductType[];
