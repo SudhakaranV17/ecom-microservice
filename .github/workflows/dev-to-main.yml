@@ -23,7 +23,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm prisma generate
+      - run: pnpm turbo run db:generate
 
       - run: pnpm tsc --noEmit
 
