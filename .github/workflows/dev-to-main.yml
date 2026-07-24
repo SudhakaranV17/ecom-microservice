@@ -14,8 +14,6 @@ jobs:
 
       # Install pnpm first
       - uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       # Then setup Node + pnpm cache
       - uses: actions/setup-node@v4
