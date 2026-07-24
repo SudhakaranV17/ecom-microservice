@@ -1,18 +1,20 @@
 name: Auto Merge PR
 
 on:
-  pull_request:
+  workflow_run:
+    workflows:
+      - "PR Check"
     types:
-      - opened
-      - synchronize
-      - reopened
+      - completed
 
 permissions:
   contents: write
   pull-requests: write
 
 jobs:
-  enable-auto-merge:
+  auto-merge:
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     runs-on: ubuntu-latest
 
@@ -24,4 +26,4 @@ jobs:
             --merge
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_URL: ${{ github.event.workflow_run.pull_requests[0].html_url }}
