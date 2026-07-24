@@ -1,0 +1,17 @@
+{
+    "name": "@repo/order-db",
+    "version": "1.0.0",
+    "type": "module",
+    "devDependencies": {
+        "@repo/eslint-config": "workspace:*",
+        "@repo/typescript-config": "workspace:*"
+    },
+    "exports": {
+        ".": "./src/index.ts"
+    },
+    "dependencies": {
+        "@types/node": "^26.1.1",
+        "dotenv": "^17.4.2",
+        "mongoose": "^9.7.4"
+    }
+}
