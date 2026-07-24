@@ -1,7 +1,3 @@
-# Turborepo starter
-
-This Turborepo starter is maintained by the Turborepo core team.
-
 ## Using this example
 
 Run the following command:
@@ -16,11 +12,16 @@ This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
+- `@repo/product-db`: `product-db` used for products service
+- `@repo/order-db`: `order-db` used for orders service
+- `@repo/types`: `types` used throughout the monorepo
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `admin`: `admin` used for admin panel
+- `client`: `client` used for client panel
+- `order-service-fastify`: `order-service-fastify` order service
+- `payment-service-hono`: `payment-service-hono` payment service
+- `product-service-express`: `product-service-express` product service
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
@@ -57,15 +58,15 @@ You can build a specific package by using a [filter](https://turborepo.dev/docs/
 With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
 
 ```sh
-turbo build --filter=docs
+turbo build --filter=types
 ```
 
 Without global `turbo`:
 
 ```sh
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+npx turbo build --filter=types
+yarn exec turbo build --filter=types
+pnpm exec turbo build --filter=types
 ```
 
 ### Develop
@@ -93,15 +94,15 @@ You can develop a specific package by using a [filter](https://turborepo.dev/doc
 With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
 
 ```sh
-turbo dev --filter=web
+turbo dev --filter=product-service-express
 ```
 
 Without global `turbo`:
 
 ```sh
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+npx turbo dev --filter=product-service-express
+yarn exec turbo dev --filter=product-service-express
+pnpm exec turbo dev --filter=product-service-express
 ```
 
 ### Remote Caching
