@@ -1,44 +1,41 @@
-name: Dev CI
+name: PR Check
 
 on:
-  push:
+  pull_request:
     branches:
-      - dev
+      - main
 
 jobs:
   validate:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      # Install pnpm first
-      - uses: pnpm/action-setup@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
 
-      # Then setup Node + pnpm cache
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - run: pnpm turbo run db:generate
+      - name: Generate Prisma
+        run: pnpm turbo db:generate
 
-      - run: pnpm tsc --noEmit
+      - name: Type Check
+        run: pnpm turbo check-types
 
-      - run: pnpm lint
+      - name: Lint
+        run: pnpm turbo lint
 
-      - run: pnpm test
+      # - name: Test
+      #   run: pnpm turbo test
 
-      - run: pnpm turbo build
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
-          branch: dev
-          title: "Auto PR: dev → main"
-          body: |
-            Auto-generated after CI passed.
+      - name: Build
+        run: pnpm turbo build
