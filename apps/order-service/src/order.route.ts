@@ -1,5 +1,8 @@
 import { FastifyInstance } from "fastify";
-import { authMiddleware } from "./middleware/authMiddleware";
+import {
+  accessControlMiddleware,
+  authMiddleware,
+} from "./middleware/authMiddleware";
 import { Order } from "@repo/order-db";
 
 export const orderRoute = async (fastify: FastifyInstance) => {
@@ -12,8 +15,12 @@ export const orderRoute = async (fastify: FastifyInstance) => {
       return reply.send(orders);
     },
   );
-  fastify.get("/orders", async (request, reply) => {
-    const orders = await Order.find({});
-    return reply.send(orders);
-  });
+  fastify.get(
+    "/orders",
+    { preHandler: accessControlMiddleware },
+    async (request, reply) => {
+      const orders = await Order.find();
+      return reply.send(orders);
+    },
+  );
 };

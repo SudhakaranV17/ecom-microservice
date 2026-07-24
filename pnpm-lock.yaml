@@ -540,6 +540,9 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -570,6 +573,9 @@ importers:
       '@repo/order-db':
         specifier: workspace:*
         version: link:../../packages/order-db
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
@@ -598,9 +604,15 @@ importers:
       '@hono/node-server':
         specifier: ^2.0.6
         version: 2.0.8(hono@4.12.29)
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       hono:
         specifier: ^4.12.27
         version: 4.12.29
+      stripe:
+        specifier: ^22.3.2
+        version: 22.3.2(@types/node@20.19.43)
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
@@ -623,6 +635,9 @@ importers:
       '@repo/product-db':
         specifier: workspace:*
         version: link:../../packages/product-db
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
@@ -770,6 +785,22 @@ importers:
       prisma:
         specifier: ^7.8.0
         version: 7.8.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@6.0.3)
+
+  packages/types:
+    dependencies:
+      '@repo/product-db':
+        specifier: workspace:*
+        version: link:../product-db
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^26.1.1
+        version: 26.1.1
 
   packages/typescript-config: {}
 
@@ -4206,6 +4237,15 @@ packages:
   strip-json-comments@5.0.3:
     resolution: {integrity: sha512-1tB5mhVo7U+ETBKNf92xT4hrQa3pm0MZ0PQvuDnWgAAGHDsfp4lPSpiS6psrSiet87wyGPh9ft6wmhOMQ0hDiw==}
     engines: {node: '>=14.16'}
+
+  stripe@22.3.2:
+    resolution: {integrity: sha512-O13QOvgEIQvDlTy6Ubb5kB980wpbhmoZNsgCXKILjCMZS67f+bW+6w99k3gnSi/N1lkryoj1WYdpGT5Wc5edjg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
 
   styled-jsx@5.1.6:
     resolution: {integrity: sha512-qSVyDTeMotdvQYoHWLNGwRFJHC+i+ZvdBRYosOFgC+Wg1vx4frN2/RG/NA7SYqqvKNLf39P2LSRA2pu6n0XYZA==}
@@ -8043,6 +8083,10 @@ snapshots:
   strip-json-comments@2.0.1: {}
 
   strip-json-comments@5.0.3: {}
+
+  stripe@22.3.2(@types/node@20.19.43):
+    optionalDependencies:
+      '@types/node': 20.19.43
 
   styled-jsx@5.1.6(react@19.2.7):
     dependencies:

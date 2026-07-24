@@ -24,6 +24,7 @@ export default async function page() {
   });
   const dataPayment = await resPayment.json();
   console.log(dataPayment);
+  console.log(token)
   return (
     <div>
       <h1>test</h1>
