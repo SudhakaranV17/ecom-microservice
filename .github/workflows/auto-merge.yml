@@ -19,11 +19,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Enable auto merge
+      - name: Find PR and enable auto merge
         run: |
-          gh pr merge "$PR_URL" \
+          PR_NUMBER=$(gh pr list \
+            --state open \
+            --json number,headRefOid \
+            --jq '.[] | select(.headRefOid=="${{ github.event.workflow_run.head_sha }}") | .number')
+
+          if [ -z "$PR_NUMBER" ]; then
+            echo "No PR found"
+            exit 0
+          fi
+
+          gh pr merge "$PR_NUMBER" \
             --auto \
             --merge
+
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_URL: ${{ github.event.workflow_run.pull_requests[0].html_url }}
