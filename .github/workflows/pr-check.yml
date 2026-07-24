@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -33,9 +37,6 @@ jobs:
 
       - name: Lint
         run: pnpm turbo lint
-
-      # - name: Test
-      #   run: pnpm turbo test
 
       - name: Build
         run: pnpm turbo build
