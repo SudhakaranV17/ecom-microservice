@@ -512,6 +512,12 @@ importers:
       '@hookform/resolvers':
         specifier: ^5.4.0
         version: 5.4.0(react-hook-form@7.81.0(react@19.2.7))
+      '@stripe/react-stripe-js':
+        specifier: ^6.8.0
+        version: 6.8.0(@stripe/stripe-js@9.12.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@stripe/stripe-js':
+        specifier: ^9.12.0
+        version: 9.12.0
       axios:
         specifier: ^1.18.1
         version: 1.18.1
@@ -2020,6 +2026,17 @@ packages:
 
   '@standard-schema/utils@0.3.0':
     resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
+
+  '@stripe/react-stripe-js@6.8.0':
+    resolution: {integrity: sha512-nRrPkos00CmUeqXHxtJkXmSbl9/6ybGI4jVebzsiA6QaE5A4iw9dn1C4hUx2tBmQQV2e6pm2aLkPYov4hdta2w==}
+    peerDependencies:
+      '@stripe/stripe-js': '>=9.5.0 <10.0.0'
+      react: '>=16.8.0 <20.0.0'
+      react-dom: '>=16.8.0 <20.0.0'
+
+  '@stripe/stripe-js@9.12.0':
+    resolution: {integrity: sha512-wCUYZNYo7E/6B3Rv2i/g/Rmj2mTiOX6HEwWYUWUuNUKwEhzTo/SXuQ1IoNo3mknWIHUQyqdakv1Nl2SiYPrCrw==}
+    engines: {node: '>=12.16'}
 
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
@@ -5709,6 +5726,15 @@ snapshots:
   '@standard-schema/spec@1.1.0': {}
 
   '@standard-schema/utils@0.3.0': {}
+
+  '@stripe/react-stripe-js@6.8.0(@stripe/stripe-js@9.12.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+    dependencies:
+      '@stripe/stripe-js': 9.12.0
+      prop-types: 15.8.1
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
+
+  '@stripe/stripe-js@9.12.0': {}
 
   '@swc/helpers@0.5.15':
     dependencies:
