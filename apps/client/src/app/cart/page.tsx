@@ -2,6 +2,7 @@
 
 import PaymentForm from "@/components/PaymentForm";
 import ShippingForm from "@/components/ShippingForm";
+import StripePaymentForm from "@/components/StripePaymentForm";
 import useCartStore from "@/stores/cartStore";
 import { ShippingFormInputs } from "@repo/types";
 import { ArrowRight, Trash2 } from "lucide-react";
@@ -67,7 +68,7 @@ const CartContent = () => {
         {/* STEPS */}
         <div className="w-full lg:w-7/12 shadow-lg border-1 border-gray-100 p-8 rounded-lg flex flex-col gap-8">
           {activeStep === 1 ? (
-            cart.map((item:any) => (
+            cart.map((item: any) => (
               // SINGLE CART ITEM
               <div
                 className="flex items-center justify-between"
@@ -113,7 +114,7 @@ const CartContent = () => {
           ) : activeStep === 2 ? (
             <ShippingForm setShippingForm={setShippingForm} />
           ) : activeStep === 3 && shippingForm ? (
-            <PaymentForm />
+            <StripePaymentForm shippingform={shippingForm} />
           ) : (
             <p className="text-sm text-gray-500">
               Please fill in the shipping form to continue.
@@ -129,7 +130,11 @@ const CartContent = () => {
               <p className="font-medium">
                 $
                 {cart
-                  .reduce((acc:number, item:any) => acc + item.price * item.quantity, 0)
+                  .reduce(
+                    (acc: number, item: any) =>
+                      acc + item.price * item.quantity,
+                    0,
+                  )
                   .toFixed(2)}
               </p>
             </div>
@@ -147,7 +152,11 @@ const CartContent = () => {
               <p className="font-medium">
                 $
                 {cart
-                  .reduce((acc:number, item:any) => acc + item.price * item.quantity, 0)
+                  .reduce(
+                    (acc: number, item: any) =>
+                      acc + item.price * item.quantity,
+                    0,
+                  )
                   .toFixed(2)}
               </p>
             </div>
