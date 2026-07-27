@@ -1,21 +1,21 @@
+import { clerkMiddleware, getAuth } from "@clerk/express";
+import cors from "cors";
+import dotenv from "dotenv";
 import express, {
+  type NextFunction,
   type Request,
   type Response,
-  type NextFunction,
 } from "express";
-import dotenv from "dotenv";
-dotenv.config();
-import cors from "cors";
 import helmet from "helmet";
-import { ErrorMiddleware } from "./middleware/ErrorMiddleware";
 import dns from "node:dns/promises";
 import { pinoHttp } from "pino-http";
+import { ErrorMiddleware } from "./middleware/ErrorMiddleware";
 import logger from "./middleware/Logger";
-import userRoute from "./modules/user/user.route";
 import authRoute from "./modules/auth/auth.route";
-import { clerkMiddleware, getAuth } from "@clerk/express";
-import productRoute from "./modules/product/product.route";
 import categoryRoute from "./modules/category/category.route";
+import productRoute from "./modules/product/product.route";
+import userRoute from "./modules/user/user.route";
+dotenv.config();
 
 dns.setServers(["1.1.1.1"]);
 

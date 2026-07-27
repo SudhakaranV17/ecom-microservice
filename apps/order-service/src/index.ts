@@ -1,11 +1,12 @@
 import Fastify from "fastify";
 import dotenv from "dotenv";
 dotenv.config();
-import { clerkPlugin, getAuth } from "@clerk/fastify";
+import { clerkPlugin } from "@clerk/fastify";
 import { authMiddleware } from "./middleware/authMiddleware.js";
 import { ConnectDB } from "@repo/order-db";
 import { orderRoute } from "./order.route.js";
 import dns from "dns";
+import { consumer, producer } from "./utils/kafka.js";
 dns.setServers(["1.1.1.1"]);
 const fastify = Fastify({
   logger: {
@@ -33,7 +34,11 @@ fastify.get("/test", { preHandler: authMiddleware }, async (request, reply) => {
  */
 const start = async () => {
   try {
-    await ConnectDB();
+    Promise.all([
+      await ConnectDB(),
+      await producer.connect(),
+      await consumer.connect(),
+    ]);
     await fastify.listen({ port: 8001 });
     fastify.log.info(`Server is running on port ${process.env.PORT}`);
   } catch (err) {
