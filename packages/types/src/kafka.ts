@@ -1,7 +1,9 @@
 export const KAFKA_TOPICS = {
-  USER_CREATED: "user-created",
-  ORDER_CREATED: "order-created",
-  PAYMENT_COMPLETED: "payment-completed",
+  USER_CREATED: "user.created",
+  PRODUCT_CREATED: "product.created",
+  PRODUCT_DELETED: "product.deleted",
+  ORDER_CREATED: "order.created",
+  PAYMENT_COMPLETED: "payment.completed",
 } as const;
 
 export const KAFKA_SERVICE = {

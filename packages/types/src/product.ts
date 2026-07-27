@@ -5,7 +5,7 @@ export interface StripeProductType {
   id: string;
   name: string;
   price: number;
-  quantity: number;
+  quantity?: number;
 }
 
 export type CategoryType = Category;

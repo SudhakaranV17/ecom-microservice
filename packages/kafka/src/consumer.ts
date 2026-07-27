@@ -10,7 +10,7 @@ export const CreateConsumer = (kafka: Kafka, groupId: string) => {
 
   const subscribe = async (
     topic: string,
-    handler = (message: any) => Promise<void>,
+    handler: (message: any) => Promise<void>,
   ) => {
     await consumer.subscribe({
       topic: topic,
