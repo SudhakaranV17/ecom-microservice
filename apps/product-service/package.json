@@ -6,7 +6,7 @@
   "main": "server.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "tsx --watch server.ts",
+    "dev": "tsx --watch --trace-warnings server.ts",
     "start": "node dist/app.js",
     "check-types": "tsc --noEmit",
     "lint": "eslint . --fix"
@@ -17,6 +17,7 @@
   "dependencies": {
     "@clerk/express": "^2.1.35",
     "@repo/product-db": "workspace:*",
+    "@repo/kafka": "workspace:*",
     "@repo/types": "workspace:*",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",

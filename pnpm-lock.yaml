@@ -579,6 +579,9 @@ importers:
       '@clerk/fastify':
         specifier: ^3.1.45
         version: 3.1.50(fastify@5.10.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@repo/kafka':
+        specifier: workspace:*
+        version: link:../../packages/kafka
       '@repo/order-db':
         specifier: workspace:*
         version: link:../../packages/order-db
@@ -616,6 +619,9 @@ importers:
       '@hono/node-server':
         specifier: ^2.0.6
         version: 2.0.8(hono@4.12.29)
+      '@repo/kafka':
+        specifier: workspace:*
+        version: link:../../packages/kafka
       '@repo/types':
         specifier: workspace:*
         version: link:../../packages/types
@@ -647,6 +653,9 @@ importers:
       '@clerk/express':
         specifier: ^2.1.35
         version: 2.1.40(express@5.2.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@repo/kafka':
+        specifier: workspace:*
+        version: link:../../packages/kafka
       '@repo/product-db':
         specifier: workspace:*
         version: link:../../packages/product-db
@@ -753,6 +762,22 @@ importers:
       typescript-eslint:
         specifier: ^8.50.0
         version: 8.63.0(eslint@9.39.5(jiti@2.7.0))(typescript@5.9.3)
+
+  packages/kafka:
+    dependencies:
+      kafkajs:
+        specifier: ^2.2.4
+        version: 2.2.4
+    devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^26.1.1
+        version: 26.1.1
 
   packages/order-db:
     dependencies:
@@ -3406,6 +3431,10 @@ packages:
 
   jws@4.0.1:
     resolution: {integrity: sha512-EKI/M/yqPncGUUh44xz0PxSidXFr/+r0pA70+gIYhjv+et7yxM+s29Y+VGDkovRofQem0fs7Uvf4+YmAdyRduA==}
+
+  kafkajs@2.2.4:
+    resolution: {integrity: sha512-j/YeapB1vfPT2iOIUn/vxdyKEuhuY2PxMBvf5JWux6iSaukAccrMtXEY/Lb7OvavDhOWME589bpLrEdnVHjfjA==}
+    engines: {node: '>=14.0.0'}
 
   kareem@3.3.0:
     resolution: {integrity: sha512-kpSuLD3/7RenBnjnJdOHXCKC8dTd1JzeOiJhN0necWWci6cC+qX+VuwPnMVgb+a4+KNJSfgqahpnfWaeDXCimw==}
@@ -7288,6 +7317,8 @@ snapshots:
     dependencies:
       jwa: 2.0.1
       safe-buffer: 5.2.1
+
+  kafkajs@2.2.4: {}
 
   kareem@3.3.0: {}
 

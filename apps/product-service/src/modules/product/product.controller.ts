@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { prisma, Prisma } from "@repo/product-db";
 import logger from "../../middleware/Logger";
+import { producer } from "../../utils/kafka";
+import { KAFKA_TOPICS, StripeProductType } from "@repo/types";
 
 export const createProduct = async (
   req: Request,
@@ -43,6 +45,13 @@ export const createProduct = async (
 
     const product = await prisma.product.create({ data });
     logger.info(`New Product created ${JSON.stringify(product, null, 2)}`);
+    // kafka producer
+    const stripeProduct: StripeProductType = {
+      id: String(product.id),
+      name: product.name,
+      price: product.price,
+    };
+    producer.send(KAFKA_TOPICS.PRODUCT_CREATED, { value: stripeProduct });
     res.status(201).json({ product });
   } catch (error) {
     logger.error(`Error at create product ${JSON.stringify(error, null, 2)}`);
@@ -72,6 +81,8 @@ export const deleteProduct = async (req: Request, res: Response) => {
       where: { id: Number(id) },
     });
     logger.info(`Product deleted ${JSON.stringify(product, null, 2)}`);
+    // kafka producer
+    producer.send(KAFKA_TOPICS.PRODUCT_DELETED, { value: Number(id) });
     return res.status(200).json({ product });
   } catch (error) {
     logger.error(`Error at delete product ${JSON.stringify(error, null, 2)}`);

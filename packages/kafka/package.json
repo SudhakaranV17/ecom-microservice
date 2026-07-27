@@ -1,0 +1,17 @@
+{
+  "name": "@repo/kafka",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "lint": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^26.1.1"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  }
+}
