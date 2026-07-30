@@ -7,6 +7,7 @@ export interface IOrder {
   email: string;
   amount: number;
   status: string;
+  stripeSessionId: string;
   products: object;
 }
 const orderSchema = new Schema<IOrder>(
@@ -15,6 +16,7 @@ const orderSchema = new Schema<IOrder>(
     email: { type: String, required: true },
     amount: { type: Number, required: true },
     status: { type: String, default: "PENDING", enum: orderStatus },
+    stripeSessionId: { type: String, required: true, unique: true },
     products: {
       type: [
         {
