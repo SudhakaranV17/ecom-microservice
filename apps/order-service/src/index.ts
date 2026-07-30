@@ -7,6 +7,7 @@ import { ConnectDB } from "@repo/order-db";
 import { orderRoute } from "./order.route.js";
 import dns from "dns";
 import { consumer, producer } from "./utils/kafka.js";
+import { runKafkaSubscriptions } from "./utils/subscriptions.js";
 dns.setServers(["1.1.1.1"]);
 const fastify = Fastify({
   logger: {
@@ -34,11 +35,9 @@ fastify.get("/test", { preHandler: authMiddleware }, async (request, reply) => {
  */
 const start = async () => {
   try {
-    Promise.all([
-      await ConnectDB(),
-      await producer.connect(),
-      await consumer.connect(),
-    ]);
+    // ✅ Properly await Promise.all — consumer guaranteed connected before subscribe
+    await Promise.all([ConnectDB(), producer.connect(), consumer.connect()]);
+    await runKafkaSubscriptions();
     await fastify.listen({ port: 8001 });
     fastify.log.info(`Server is running on port ${process.env.PORT}`);
   } catch (err) {
